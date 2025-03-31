@@ -22,10 +22,11 @@ func main() {
 		log.Fatalf("error reading config: %v", err)
 	}
 
-	db, err := sql.Open("postgres", dbURL)
+	db, err := sql.Open("postgres", cfg.DBURL)
 	if err != nil {
-		log.Fatalf("error reading database: %v", err)
+		log.Fatalf("error connecting database: %v", err)
 	}
+	defer db.Close()
 	dbQueries := database.New(db)
 
 	//storing the config in a new instance of the state struct
@@ -39,6 +40,7 @@ func main() {
 	}
 	//register the handler with its function
 	cmds.register("login", handlerLogin)
+	cmds.register("register", handlerRegister)
 
 	//os.Args used to get the cl arguments passed in
 	if len(os.Args) < 2 {
