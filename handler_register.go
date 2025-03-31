@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/google/uuid"
@@ -24,7 +25,8 @@ func handlerRegister(s *state, cmd command) error {
 		Name:      name,
 	})
 	if err != nil {
-		return fmt.Errorf("couldn't create user: %w", err)
+		fmt.Fprintf(os.Stderr, "couldn't create user: %v", err)
+		os.Exit(1)
 	}
 
 	err = s.cfg.SetUser(user.Name)

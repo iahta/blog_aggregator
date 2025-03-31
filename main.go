@@ -41,6 +41,9 @@ func main() {
 	//register the handler with its function
 	cmds.register("login", handlerLogin)
 	cmds.register("register", handlerRegister)
+	cmds.register("reset", handlerReset)
+	cmds.register("users", handlerUsers)
+	cmds.register("agg", handlerAgg)
 
 	//os.Args used to get the cl arguments passed in
 	if len(os.Args) < 2 {
