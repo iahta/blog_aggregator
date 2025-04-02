@@ -45,6 +45,7 @@ func main() {
 	cmds.register("users", handlerUsers)
 	cmds.register("agg", handlerAgg)
 	cmds.register("addfeed", handlerAddFeed)
+	cmds.register("feeds", handlerFeed)
 
 	//os.Args used to get the cl arguments passed in
 	if len(os.Args) < 2 {
