@@ -9,16 +9,12 @@ import (
 	"github.com/iahta/blog_aggregator/internal/database"
 )
 
-func handlerAddFeed(s *state, cmd command) error {
+func handlerAddFeed(s *state, cmd command, user database.User) error {
 	//Add feed expects only 2 argument
 	if len(cmd.Args) != 2 {
 		return fmt.Errorf("usage: %s <name> %s <url>", cmd.Name, cmd.Args)
 	}
-	userName := s.cfg.CurrentUserName
-	user, err := s.db.GetUser(context.Background(), userName)
-	if err != nil {
-		return fmt.Errorf("couldn't find user: %w", err)
-	}
+
 	feedName := cmd.Args[0]
 	url := cmd.Args[1]
 
